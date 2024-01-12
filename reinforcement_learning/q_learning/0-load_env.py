@@ -2,6 +2,7 @@
 """
 loads the pre-made FrozenLakeEnv environment from OpenAI's gym
 """
+import gym
 
 
 def load_frozen_lake(desc=None, map_name=None, is_slippery=False):
