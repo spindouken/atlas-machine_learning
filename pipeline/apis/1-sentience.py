@@ -18,7 +18,9 @@ def get_json(url, session):
         response.raise_for_status()  # raise an exception for HTTP errors
         return response.json()  # return the JSON content of the response
     except requests.RequestException as e:
-        print(f"request failed: {e}")  # print error message if request fails
+        print(
+            "request failed: {error}".format(error=e)
+        )
         return None  # return None if an exception occurs
 
 
