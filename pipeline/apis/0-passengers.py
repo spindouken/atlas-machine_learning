@@ -5,6 +5,17 @@ looking for available starships!
 import requests
 
 
+def parse_passenger_capacity(passenger_str):
+    """
+    parses the passenger capacity string to an integer
+    Returns 0 if the string cannot be directly converted
+    """
+    try:
+        # if string includes commas, remove them before conversion
+        return int(passenger_str.replace(",", ""))
+    except ValueError:
+        return 0  # return 0 if conversion fails
+
 def availableShips(passengerCount):
     """
     returns the list of ships that can hold a given number of passengers
@@ -18,12 +29,9 @@ def availableShips(passengerCount):
         data = response.json()  # parse response as JSON
 
         for ship in data["results"]:  # loop over ships
-            # check if passengers is a digit and meets the capacity requirement
-            if (
-                ship["passengers"].isdigit()
-                and int(ship["passengers"]) >= passengerCount
-            ):
-                ships.append(ship["name"])  # add ship name if criteria met
+            passengers = parse_passenger_capacity(ship["passengers"])
+            if passengers >= passengerCount:
+                ships.append(ship["name"])
 
         url = data["next"]  # get URL for the next page
 
