@@ -11,7 +11,7 @@ def get_name_by_id(endpoint, id):
     fetches the name or other details of an entity (rocket or launchpad) by id
     """
     # crafting URL to ask SpaceX about either rockets or launchpads
-    api_url = f"https://api.spacexdata.com/v4/{endpoint}/{id}"
+    api_url = "https://api.spacexdata.com/v4/{}/{}".format(endpoint, id)
     response = requests.get(api_url)  # api request
     if response.ok:  # if everything went well
         data = response.json()  # get the response as JSON
