@@ -48,9 +48,8 @@ def get_first_launch_info():
         launch_date_local = datetime.fromtimestamp(
             launch_date_unix, tz=timezone.utc
         ).astimezone(timezone(timedelta(hours=-4)))
-        formatted_date = launch_date_local.strftime(
-            "%Y-%m-%dT%H:%M:%S%z"
-        )  # adjust time formatting as desired
+        formatted_date = launch_date_local.strftime("%Y-%m-%dT%H:%M:%S%z")
+        formatted_date = formatted_date[:-2] + ":" + formatted_date[-2:]
 
         return ("{launch_name} ({formatted_date}) {rocket_name} - "
                 "{launchpad_name} ({launchpad_locality})"
