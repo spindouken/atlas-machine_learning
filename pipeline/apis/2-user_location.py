@@ -26,9 +26,9 @@ def print_user_location(api):
         print("Not found")
     elif response.status_code == 403:
         reset_timestamp = response.headers["X-RateLimit-Reset"]
-        datetime = datetime.datetime.fromtimestamp(int(reset_timestamp))
+        reset_time = datetime.datetime.fromtimestamp(int(reset_timestamp))
         now = datetime.datetime.now()
-        remain = (datetime - now).total_seconds() / 60
+        remain = (reset_time - now).total_seconds() / 60
         print("Reset in {:.0f} min".format(remain))
     else:
         location = response.json().get("location")
