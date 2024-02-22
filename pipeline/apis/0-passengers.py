@@ -16,6 +16,7 @@ def parse_passenger_capacity(passenger_str):
     except ValueError:
         return 0  # return 0 if conversion fails
 
+
 def availableShips(passengerCount):
     """
     returns the list of ships that can hold a given number of passengers
