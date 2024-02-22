@@ -25,11 +25,12 @@ def print_user_location(api):
     if response.status_code == 404:
         print("Not found")
     elif response.status_code == 403:
-        reset_timestamp = response.headers.get("X-Ratelimit-Reset")
-        reset_time = datetime.fromtimestamp(int(reset_timestamp))
-        now = datetime.now()
-        difference = reset_time - now
-        print("Reset in {} min".format(difference.seconds // 60))
+        reset_timestamp = response.headers["X-RateLimit-Reset"]
+        datetime = datetime.datetime.fromtimestamp(int(reset_timestamp))
+        now = datetime.datetime.now()
+        # Fixing logic for calculating remaining minutes
+        remain = (dt - now).total_seconds() / 60
+        print("Reset in {:.0f} min".format(remain))
     else:
         location = response.json().get("location")
         print(location)
