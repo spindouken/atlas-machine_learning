@@ -28,8 +28,7 @@ def print_user_location(api):
         reset_timestamp = response.headers["X-RateLimit-Reset"]
         datetime = datetime.datetime.fromtimestamp(int(reset_timestamp))
         now = datetime.datetime.now()
-        # Fixing logic for calculating remaining minutes
-        remain = (dt - now).total_seconds() / 60
+        remain = (datetime - now).total_seconds() / 60
         print("Reset in {:.0f} min".format(remain))
     else:
         location = response.json().get("location")
